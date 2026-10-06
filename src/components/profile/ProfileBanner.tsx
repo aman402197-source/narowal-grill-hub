@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Camera, ChevronLeft, LogOut } from "lucide-react";
 
-import bannerImage from "@/assets/profile-banner.jpg";
-import customerAvatar from "@/assets/customer-avatar.jpg";
+import bannerImage from "@/assets/profile-banner.webp";
+import customerAvatar from "@/assets/customer-avatar.webp";
 
 export type ProfileStat = { label: string; value: string };
 

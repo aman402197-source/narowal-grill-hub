@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ChefHat, Flame, Pause, Play } from "lucide-react";
 
-import authChef from "@/assets/auth-chef-anime.png";
+import authChef from "@/assets/auth-chef-anime.webp";
 import { AuthFlowRail } from "@/components/auth/flow-rail";
 import type { ChefVolt } from "@/hooks/use-chef-volt";
 import { readCalmOverride, setCalmOverride } from "@/hooks/use-reduced-motion";

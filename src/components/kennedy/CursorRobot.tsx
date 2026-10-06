@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import robot from "@/assets/white-robot.png";
+import robot from "@/assets/white-robot.webp";
 import { DISHES } from "@/lib/menu";
 
 /**

@@ -14,15 +14,15 @@ import { PizzaMascot } from "@/components/kennedy/PizzaMascot";
 import { BonusTape } from "@/components/kennedy/BonusTape";
 import { MenuShowcase } from "@/components/kennedy/MenuShowcase";
 import { MenuBook } from "@/components/kennedy/MenuBook";
-import menuBookCaddy from "@/assets/caddy-avatar.jpg";
+import menuBookCaddy from "@/assets/caddy-avatar.webp";
 import { SliceGallery } from "@/components/kennedy/SliceGallery";
 import { MascotFooter } from "@/components/kennedy/MascotFooter";
 import { VoiceOrderButton } from "@/components/kennedy/VoiceOrderButton";
 import { Reveal } from "@/components/kennedy/Reveal";
-import tomato from "@/assets/tomato.png";
-import cheeseSlice from "@/assets/cheese-slice.png";
-import cheeseLogo from "@/assets/cheese-logo.png";
-import meat from "@/assets/meat.png";
+import tomato from "@/assets/tomato.webp";
+import cheeseSlice from "@/assets/cheese-slice.webp";
+import cheeseLogo from "@/assets/cheese-logo.webp";
+import meat from "@/assets/meat.webp";
 
 
 

@@ -7,10 +7,10 @@ import {
   useTransform,
 } from "framer-motion";
 import { OrderButton } from "./OrderButton";
-import sticker from "@/assets/pizza-sticker.png";
-import selfie from "@/assets/slice-selfie.png";
-import cheeseBite from "@/assets/cheese-bite.png";
-import malaiBotti from "@/assets/malai-botti.png";
+import sticker from "@/assets/pizza-sticker.webp";
+import selfie from "@/assets/slice-selfie.webp";
+import cheeseBite from "@/assets/cheese-bite.webp";
+import malaiBotti from "@/assets/malai-botti.webp";
 
 const CARDS = [
   {
