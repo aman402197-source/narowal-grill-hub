@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight, Headphones, RotateCcw, ShoppingBag } from "l
 import { fetchDishes, DISHES, BACKEND_MENU } from "@/lib/menu";
 import { addToCart } from "@/lib/cart";
 import { isMuted, playSfx } from "@/lib/sfx";
-import caddyAvatar from "@/assets/caddy-avatar.webp";
 import bookCover from "@/assets/menu-book-cover.jpg";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from "framer-motion";
@@ -52,15 +51,6 @@ function speak(text: string) {
   synth.speak(utter);
 }
 
-const CADDY_LINES = [
-  "Grab the corner & swipe — I’ll hold the book!",
-  "Chef’s pick! Hot from the oven.",
-  "Smells amazing, right? Tap order!",
-  "This one’s a crowd favourite.",
-  "Keep flipping — the best is coming.",
-  "My personal guilty pleasure 😋",
-];
-
 type Drag = { dir: 1 | -1; p: number; settling: boolean; commit: boolean };
 
 export function MenuBook() {
@@ -68,7 +58,7 @@ export function MenuBook() {
   const [dishes, setDishes] = useState<BookDish[]>(() => (BACKEND_MENU ? [] : formatDishes(DISHES)));
   const [page, setPage] = useState(0); // 0 = cover, 1..n = dish
   const [drag, setDrag] = useState<Drag | null>(null);
-  const [hop, setHop] = useState(0);
+  const [menuError, setMenuError] = useState(false);
   const start = useRef<{ x: number; w: number; id: number } | null>(null);
   const busy = useRef(false);
 
@@ -80,7 +70,7 @@ export function MenuBook() {
           setPage(0);
         }
       })
-      .catch(() => {});
+      .catch(() => setMenuError(true));
   }, []);
 
   useEffect(() => () => {
@@ -104,7 +94,6 @@ export function MenuBook() {
             if (dir > 0 && d) speak(d.name);
             return next;
           });
-          setHop((h) => h + 1);
         }
         setDrag(null);
         busy.current = false;
@@ -129,7 +118,6 @@ export function MenuBook() {
     playSfx("pop");
     window.speechSynthesis?.cancel();
     setPage(0);
-    setHop((h) => h + 1);
   }, [page]);
 
   const order = useCallback((slug: string, name: string) => {
@@ -195,7 +183,7 @@ export function MenuBook() {
           <span className="mb2-cover__sub">The Menu Book</span>
           <span className="mb2-cover__rule" aria-hidden="true"><i /></span>
           <span className="mb2-cover__meta">Charcoal · Dum · Wood-Fired</span>
-          <Button className="mb2-cover__cta" onClick={() => flip(1)} disabled={total === 0}>{total === 0 ? "Menu loading…" : "Open the book"}<ChevronRight aria-hidden="true" /></Button>
+          <Button className="mb2-cover__cta" onClick={() => flip(1)} disabled={total === 0}>{total === 0 ? (menuError ? "Menu currently unavailable" : "Menu loading…") : "Open the book"}<ChevronRight aria-hidden="true" /></Button>
         </div>
       );
     }
@@ -239,8 +227,6 @@ export function MenuBook() {
       </div>
     );
   };
-
-  const line = page === 0 ? "Hi! Swipe the cover to open my menu 📖" : CADDY_LINES[page % CADDY_LINES.length];
 
   return (
     <section id="menu-book" className="mb2-scene">
