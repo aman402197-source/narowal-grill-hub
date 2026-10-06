@@ -13,8 +13,9 @@ import { OrderButton } from "@/components/kennedy/OrderButton";
 import { PizzaMascot } from "@/components/kennedy/PizzaMascot";
 import { BonusTape } from "@/components/kennedy/BonusTape";
 import { MenuShowcase } from "@/components/kennedy/MenuShowcase";
-import { MenuBook } from "@/components/kennedy/MenuBook";
-import menuBookCaddy from "@/assets/caddy-avatar.webp";
+import { MenuBookLauncher } from "@/components/kennedy/MenuBookLauncher";
+import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 import { SliceGallery } from "@/components/kennedy/SliceGallery";
 import { MascotFooter } from "@/components/kennedy/MascotFooter";
 import { VoiceOrderButton } from "@/components/kennedy/VoiceOrderButton";
@@ -91,6 +92,7 @@ function Index() {
   const reduce = useReducedMotion();
   const { isSignedIn, isLoading } = useSession();
   const [navOpen, setNavOpen] = useState(false);
+  const [bookOpen, setBookOpen] = useState(false);
 
   const handleOrderNow = () => {
     if (isLoading) return;
@@ -327,14 +329,9 @@ function Index() {
               Moon Grill Narowal Legacy
             </motion.p>
             <br />
-            <motion.a
-              {...rise(1.1)}
-              href="#menu-book"
-              className="hero-menubook-btn"
-            >
-              <img src={menuBookCaddy} alt="" aria-hidden="true" />
-              Open Menu Book
-            </motion.a>
+            <motion.div {...rise(1.1)}>
+              <Button onClick={() => setBookOpen(true)} className="hero-menubook-btn"><BookOpen aria-hidden="true" /> View Menu Book</Button>
+            </motion.div>
 
           </div>
 
@@ -360,9 +357,6 @@ function Index() {
           <SliceGallery />
         </Reveal>
 
-        <Reveal from="zoom" className="relative z-10" amount={0.12}>
-          <MenuBook />
-        </Reveal>
       </div>
 
 
@@ -372,6 +366,7 @@ function Index() {
       </Reveal>
 
       <VoiceOrderButton />
+      <MenuBookLauncher open={bookOpen} onOpenChange={setBookOpen} />
     </div>
   );
 }

@@ -32,5 +32,6 @@
 - [x] Verify menu filtering, Takiii, cart verification states, payment selection, and access navigation on desktop and phone.
 
 # Active order discovery
+- [x] Separate the left-side menu-book launcher from Takiii; add a generated realistic cover, cream-paper viewer and eased page turns. Opening, closing and next/previous verified on desktop and narrow screens with browser-only test dishes; live menu server unavailable during verification.
 - [x] Add a persistent side tab for active orders with status, ETA, and one-click live tracking.
 - [ ] Verify the tab with a real active customer order. Blocked: no customer order session is available in the local preview.

@@ -5,7 +5,9 @@ import { ChevronLeft, ChevronRight, Headphones, RotateCcw, ShoppingBag } from "l
 import { fetchDishes, DISHES, BACKEND_MENU } from "@/lib/menu";
 import { addToCart } from "@/lib/cart";
 import { isMuted, playSfx } from "@/lib/sfx";
-import caddyAvatar from "@/assets/caddy-avatar.webp";
+import bookCover from "@/assets/menu-book-cover.jpg";
+import { Button } from "@/components/ui/button";
+import { useReducedMotion } from "framer-motion";
 
 type BookDish = {
   slug: string;
@@ -49,22 +51,14 @@ function speak(text: string) {
   synth.speak(utter);
 }
 
-const CADDY_LINES = [
-  "Grab the corner & swipe — I’ll hold the book!",
-  "Chef’s pick! Hot from the oven.",
-  "Smells amazing, right? Tap order!",
-  "This one’s a crowd favourite.",
-  "Keep flipping — the best is coming.",
-  "My personal guilty pleasure 😋",
-];
-
 type Drag = { dir: 1 | -1; p: number; settling: boolean; commit: boolean };
 
 export function MenuBook() {
+  const reducedMotion = useReducedMotion();
   const [dishes, setDishes] = useState<BookDish[]>(() => (BACKEND_MENU ? [] : formatDishes(DISHES)));
   const [page, setPage] = useState(0); // 0 = cover, 1..n = dish
   const [drag, setDrag] = useState<Drag | null>(null);
-  const [hop, setHop] = useState(0);
+  const [menuError, setMenuError] = useState(false);
   const start = useRef<{ x: number; w: number; id: number } | null>(null);
   const busy = useRef(false);
 
@@ -76,7 +70,7 @@ export function MenuBook() {
           setPage(0);
         }
       })
-      .catch(() => {});
+      .catch(() => setMenuError(true));
   }, []);
 
   useEffect(() => () => {
@@ -100,14 +94,13 @@ export function MenuBook() {
             if (dir > 0 && d) speak(d.name);
             return next;
           });
-          setHop((h) => h + 1);
         }
         setDrag(null);
         busy.current = false;
-      }, 620);
+      }, reducedMotion ? 30 : 680);
       if (commit) playSfx(dir > 0 ? "swoosh" : "pop");
     },
-    [dishes, total],
+    [dishes, total, reducedMotion],
   );
 
   const flip = useCallback(
@@ -125,7 +118,6 @@ export function MenuBook() {
     playSfx("pop");
     window.speechSynthesis?.cancel();
     setPage(0);
-    setHop((h) => h + 1);
   }, [page]);
 
   const order = useCallback((slug: string, name: string) => {
@@ -165,8 +157,6 @@ export function MenuBook() {
     if (drag) finish(drag.dir, drag.p > 0.28, drag.p);
   };
 
-  if (total === 0) return null;
-
   // Which pages to render
   let under = page;
   let sheet: number | null = null;
@@ -187,20 +177,18 @@ export function MenuBook() {
     if (i === 0) {
       return (
         <div className="mb2-face mb2-cover">
-          <span className="mb2-cover__frame" aria-hidden="true" />
-          <span className="mb2-cover__crest">
-            <img src={caddyAvatar} alt="" loading="lazy" decoding="async" />
-          </span>
-          <span className="mb2-cover__kicker">Takii · Caddy Kitchen</span>
+          <img className="mb2-cover__texture" src={bookCover} alt="" width={768} height={1024} decoding="async" draggable={false} />
+          <span className="mb2-cover__kicker">Moon Grill · Narowal</span>
           <span className="mb2-cover__title">Kennedy</span>
           <span className="mb2-cover__sub">The Menu Book</span>
           <span className="mb2-cover__rule" aria-hidden="true"><i /></span>
           <span className="mb2-cover__meta">Charcoal · Dum · Wood-Fired</span>
-          <span className="mb2-cover__cta">Swipe to open</span>
+          <Button className="mb2-cover__cta" onClick={() => flip(1)} disabled={total === 0}>{total === 0 ? (menuError ? "Menu currently unavailable" : "Menu loading…") : "Open the book"}<ChevronRight aria-hidden="true" /></Button>
         </div>
       );
     }
-    const d = dishes[i - 1]!;
+    const d = dishes[i - 1];
+    if (!d) return null;
     return (
       <div className="mb2-face mb2-dish">
         <img src={d.image} alt={d.name} loading="lazy" decoding="async" draggable={false} />
@@ -218,52 +206,43 @@ export function MenuBook() {
           </div>
           <div className="mb2-dish__buy">
             <span className="mb2-dish__price">{d.price}</span>
-            <button
+            <Button
               type="button"
               className="mb2-listen"
               aria-label={`Listen to ${d.name}`}
               onClick={(e) => { e.stopPropagation(); speak(`${d.name}. ${d.description}. Price: ${d.price}`); }}
             >
               <Headphones aria-hidden="true" />
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               data-sfx="cart"
               className="mb2-order"
               onClick={(e) => { e.stopPropagation(); order(d.slug, d.name); }}
             >
               <ShoppingBag aria-hidden="true" /> Order
-            </button>
+            </Button>
           </div>
         </div>
       </div>
     );
   };
 
-  const line = page === 0 ? "Hi! Swipe the cover to open my menu 📖" : CADDY_LINES[page % CADDY_LINES.length];
-
   return (
     <section id="menu-book" className="mb2-scene">
-      <div className="mb2-scene__glow" aria-hidden="true" />
-
       <header className="mb2-head">
-        <span className="mb2-head__kicker">Est. 2014 · Charcoal &amp; Dum Kitchen</span>
-        <h2 className="mb2-head__title">The <em>Menu</em> Book</h2>
-        <p className="mb2-head__hint">Grab a page corner and swipe — it flips like real paper.</p>
+        <span className="mb2-head__kicker">Charcoal · Dum · Wood-Fired</span>
       </header>
 
       <div className="mb2-stage">
-        <div className="mb2-caddy" key={hop}>
-          <span className="mb2-caddy__bubble">{line}</span>
-          <img src={caddyAvatar} alt="Kennedy menu caddy" loading="lazy" decoding="async" />
-        </div>
-
         <div
           className={`mb2-book${drag ? " is-dragging" : ""}`}
           onPointerDown={onDown}
           onPointerMove={onMove}
           onPointerUp={onUp}
-          onPointerCancel={onUp}
+          onPointerCancel={() => { start.current = null; if (drag) finish(drag.dir, false, drag.p); }}
+          tabIndex={0}
+          onKeyDown={(event) => { if (event.key === "ArrowRight") { event.preventDefault(); flip(1); } if (event.key === "ArrowLeft") { event.preventDefault(); flip(-1); } }}
           role="region"
           aria-label="Menu book, swipe to flip pages"
           aria-roledescription="flipbook"
@@ -278,8 +257,8 @@ export function MenuBook() {
             >
               <div className="mb2-sheet__front">{renderPage(sheet)}</div>
               <div className="mb2-sheet__back">
-                <img src={caddyAvatar} alt="" />
                 <span>Kennedy</span>
+                <small>Moon Grill · Narowal</small>
               </div>
               <span className="mb2-sheet__shade" aria-hidden="true" />
             </div>
@@ -290,14 +269,14 @@ export function MenuBook() {
       </div>
 
       <nav className="mb2-controls" aria-label="Menu book pages">
-        <button type="button" onClick={() => flip(-1)} disabled={page === 0} aria-label="Previous dish"><ChevronLeft /></button>
+        <Button variant="ghost" size="icon" type="button" onClick={() => flip(-1)} disabled={page === 0 || busy.current} aria-label="Previous dish" title="Previous dish"><ChevronLeft /></Button>
         <div className="mb2-controls__progress">
           <span>{page === 0 ? "Cover" : dishes[page - 1]?.name}</span>
-          <div aria-hidden="true"><i style={{ width: `${Math.max(4, (page / total) * 100)}%` }} /></div>
+           <div aria-hidden="true"><i style={{ width: `${total ? Math.max(4, (page / total) * 100) : 0}%` }} /></div>
           <small>{page} / {total}</small>
         </div>
-        <button type="button" onClick={() => flip(1)} disabled={page === total} aria-label="Next dish"><ChevronRight /></button>
-        <button type="button" onClick={closeAll} disabled={page === 0} aria-label="Back to cover"><RotateCcw /></button>
+        <Button variant="ghost" size="icon" type="button" onClick={() => flip(1)} disabled={page === total || busy.current} aria-label="Next dish" title="Next dish"><ChevronRight /></Button>
+        <Button variant="ghost" size="icon" type="button" onClick={closeAll} disabled={page === 0 || busy.current} aria-label="Back to cover" title="Back to cover"><RotateCcw /></Button>
       </nav>
     </section>
   );
