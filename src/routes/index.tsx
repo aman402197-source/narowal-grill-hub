@@ -133,7 +133,9 @@ function Index() {
             key={f.src}
             src={f.src}
             alt=""
-            loading="lazy"
+            loading="eager"
+            decoding="async"
+            draggable={false}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={
               reduce

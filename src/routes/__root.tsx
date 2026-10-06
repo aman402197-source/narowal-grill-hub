@@ -127,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         // Runs before first paint: hide the curtain loader instantly for
         // sessions that already saw it (CSS: html[data-kmg-loader-seen] .opening).
         children:
-          "try{if(sessionStorage.getItem('kmg.loader.seen.v2'))document.documentElement.setAttribute('data-kmg-loader-seen','1')}catch(e){}",
+          "try{if(sessionStorage.getItem('kmg.loader.seen.v2'))document.documentElement.setAttribute('data-kmg-loader-seen','1')}catch(e){}try{var d=document.documentElement,r=function(){d.classList.add('fonts-ready')};if(document.fonts&&document.fonts.ready){document.fonts.ready.then(r);setTimeout(r,2500)}else r()}catch(e){document.documentElement.classList.add('fonts-ready')}",
       },
     ],
   }),
