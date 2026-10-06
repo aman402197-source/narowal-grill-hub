@@ -3986,3 +3986,11 @@ img[loading="lazy"]:not([style]) {
   .mb2-sheet.is-settling { transition-duration: .01s; }
   .mb2-caddy, .mb2-caddy img, .mb2-cover__crest img, .mb2-corner, .mb2-cover__cta, .hero-menubook-btn::after, .hero-menubook-btn img { animation: none; }
 }
+
+/* Hide font-dependent loader/hero text until web fonts are ready so the
+   typeface never visibly swaps mid-animation. */
+.opening-title { transition: opacity .35s ease; }
+html:not(.fonts-ready) .opening-title,
+html:not(.fonts-ready) .opening-phase,
+html:not(.fonts-ready) .opening-pct { opacity: 0; }
+img { image-rendering: auto; }

@@ -9,8 +9,8 @@ import {
 } from "framer-motion";
 import { Facebook, Instagram, Phone, Globe, Youtube, Music2, Flame } from "lucide-react";
 import { OrderButton } from "./OrderButton";
-import mascotLeft from "@/assets/mascot-munsters.png";
-import mascotRight from "@/assets/mascot-kennedy.png";
+import mascotLeft from "@/assets/mascot-munsters.webp";
+import mascotRight from "@/assets/mascot-kennedy.webp";
 
 /**
  * Big red "mascot band" footer: two 3D characters peek in from both edges

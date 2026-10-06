@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Headphones, RotateCcw, ShoppingBag } from "l
 import { fetchDishes, DISHES, BACKEND_MENU } from "@/lib/menu";
 import { addToCart } from "@/lib/cart";
 import { isMuted, playSfx } from "@/lib/sfx";
-import caddyAvatar from "@/assets/caddy-avatar.jpg";
+import caddyAvatar from "@/assets/caddy-avatar.webp";
 
 type BookDish = {
   slug: string;

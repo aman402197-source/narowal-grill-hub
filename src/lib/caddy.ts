@@ -29,7 +29,7 @@
  * TO GO LIVE: swap the body of `fetchAssignedCaddy` / `rateCaddy` for
  * `api.get(...)` / `api.post(...)` from "@/lib/api/client". Nothing else changes.
  */
-import fallbackAvatar from "@/assets/caddy-avatar.jpg";
+import fallbackAvatar from "@/assets/caddy-avatar.webp";
 import { api, isBackendConfigured, tokens } from "@/lib/api/client";
 import { ORDERS, PROFILE } from "@/lib/api/endpoints";
 import type { OrderStatus } from "@/lib/order-status";

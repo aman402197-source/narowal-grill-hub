@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Flame, MapPin, ShoppingBag } from "lucide-react";
 
-import flowGrill from "@/assets/flow-grill.jpg";
-import flowOrder from "@/assets/flow-order.jpg";
-import flowRider from "@/assets/flow-rider.jpg";
+import flowGrill from "@/assets/flow-grill.webp";
+import flowOrder from "@/assets/flow-order.webp";
+import flowRider from "@/assets/flow-rider.webp";
 
 /**
  * A plain-language walkthrough of how Kennedy Moon Grill actually works.
