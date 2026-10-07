@@ -4005,17 +4005,21 @@ img { image-rendering: auto; }
 .community-heading h2 em { color: var(--color-flame); font-style: normal; }
 .community-heading p { margin-top: 1rem; font-size: .95rem; }
 .guest-stories__sample { display: inline-block; margin-top: .75rem; color: var(--color-charcoal); opacity: .65; font-size: .75rem; }
-/* ===== Liquid-glass fold testimonials (Kennedy red/cream) ===== */
+/* ===== Liquid-glass fold testimonials (Kennedy cream, matching slice section) ===== */
 .guest-stories { position: relative; max-width: 1280px; margin: 0 auto 4rem; padding: 5rem 2.5rem 6rem; border-radius: 40px; overflow: hidden;
   background:
-    radial-gradient(rgba(255,240,200,.16) 1.5px, transparent 1.6px) 0 0/26px 26px,
-    linear-gradient(165deg, var(--color-flame) 0%, var(--color-flame-dark) 82%);
-  color: var(--color-cream); box-shadow: var(--shadow-card); }
+    radial-gradient(
+      120% 90% at 50% 0%,
+      oklch(from var(--color-cream) calc(l + 0.03) c h) 0%,
+      var(--color-cream) 55%,
+      var(--color-cream-deep) 100%
+    );
+  color: var(--color-charcoal); box-shadow: var(--shadow-card); }
 .guest-stories__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem 1.5rem; margin-top: 3rem; perspective: 1200px; }
 
 /* Liquid glass layers */
-.liquidGlass-wrapper { --lg-tint: rgba(255,248,235,.18); --lg-shine: inset 2px 2px 1px 0 rgba(255,255,255,.5), inset -1px -1px 1px 1px rgba(255,255,255,.5);
-  position: relative; display: flex; overflow: hidden; color: var(--color-cream); border-radius: 28px;
+.liquidGlass-wrapper { --lg-tint: rgba(255,255,255,.28); --lg-shine: inset 2px 2px 1px 0 rgba(255,255,255,.6), inset -1px -1px 1px 1px rgba(255,255,255,.6);
+  position: relative; display: flex; overflow: hidden; color: var(--color-charcoal); border-radius: 28px;
   box-shadow: 0 6px 6px rgba(46,10,4,.28), 0 0 20px rgba(46,10,4,.14);
   transition: box-shadow .4s cubic-bezier(.175,.885,.32,2.2); }
 .liquidGlass-effect { position: absolute; z-index: 0; inset: 0; backdrop-filter: blur(3px); filter: url(#kennedy-glass-distortion); overflow: hidden; isolation: isolate; }
