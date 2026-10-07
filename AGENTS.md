@@ -19,3 +19,4 @@ Admin dot-grid decoration is scoped to `.admin-caddy-shell` on the shared consol
 Dish motion uses position-only layout transitions and reduced-motion guards to prevent content scaling and hidden cards.
 Active customer orders surface through one shared edge-mounted tracking tab outside staff consoles, so tracking remains discoverable without duplicating order state.
 Menu-book entry points share one controlled accessible dialog on the storefront; book presentation stays scoped to menu-book classes so chat and live menu contracts are unchanged.
+Homepage guest stories and FAQs use a scoped presentation module and the shared accessible accordion; illustrative sample stories must not be represented as verified customer reviews.

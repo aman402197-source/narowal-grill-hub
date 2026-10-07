@@ -3995,6 +3995,45 @@ html:not(.fonts-ready) .opening-phase,
 html:not(.fonts-ready) .opening-pct { opacity: 0; }
 img { image-rendering: auto; }
 
+/* Raised guest portraits and cream-paper stories, scoped to the storefront. */
+.kennedy-community { --guest-sage: oklch(0.75 0.08 145); --guest-rose: oklch(0.8 0.08 20); --guest-sky: oklch(0.78 0.07 235); background: var(--color-cream); color: var(--color-charcoal); font-family: var(--font-body); }
+.guest-stories { max-width: 1280px; margin: auto; padding: 5rem 2rem 6rem; }
+.community-heading { text-align: center; }
+.community-eyebrow { display: inline-flex; align-items: center; gap: .5rem; color: var(--color-flame-dark); font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
+.community-eyebrow svg { width: 1.1rem; height: 1.1rem; }
+.community-heading h2 { margin-top: .75rem; font: 800 3rem/1.05 var(--font-display); letter-spacing: 0; }
+.community-heading h2 em { color: var(--color-flame); font-style: normal; }
+.community-heading p { margin-top: 1rem; font-size: .95rem; }
+.guest-stories__sample { display: inline-block; margin-top: .75rem; color: var(--color-charcoal); opacity: .65; font-size: .75rem; }
+.guest-stories__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1.4rem; margin-top: 3rem; }
+.guest-story { min-width: 0; position: relative; padding-top: 1.25rem; }
+.guest-story__portrait { position: relative; height: 10.5rem; width: 100%; isolation: isolate; }
+.guest-story__portrait > span { position: absolute; inset: 3.1rem 1.25rem 0; background: var(--guest-sage); border-radius: 8px; transform: rotate(-5deg); }
+.guest-story--2 .guest-story__portrait > span { background: var(--guest-sky); transform: rotate(4deg); }
+.guest-story--3 .guest-story__portrait > span { background: var(--color-gold); }
+.guest-story--4 .guest-story__portrait > span { background: var(--guest-rose); transform: rotate(4deg); }
+.guest-story__portrait img { position: relative; display: block; width: 100%; height: 12rem; object-fit: contain; object-position: center bottom; bottom: 1.5rem; }
+.guest-story__body { position: relative; min-height: 17.5rem; background: var(--color-cream-deep); border: 1px solid var(--book-line); border-radius: 8px; padding: 1.5rem; box-shadow: var(--shadow-card); }
+.guest-story__quote { position: absolute; right: 1.2rem; top: 1.2rem; width: 1.5rem; height: 1.5rem; color: var(--color-flame); opacity: .2; }
+.guest-story__stars { display: flex; gap: .2rem; color: var(--color-flame-dark); }
+.guest-story__stars svg { width: .9rem; height: .9rem; fill: currentColor; }
+.guest-story blockquote { font-size: .95rem; line-height: 1.65; margin-top: 1.1rem; min-height: 8.7rem; }
+.guest-story__person { border-top: 1px solid var(--book-line); padding-top: .85rem; margin-top: .85rem; }
+.guest-story__person h3 { font: 800 1rem var(--font-display); }
+.guest-story__person span { display: block; margin-top: .2rem; font-size: .75rem; color: var(--color-flame-dark); }
+.kennedy-faq { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; max-width: 1160px; margin: auto; padding: 2rem 2rem 6rem; align-items: start; }
+.community-heading--faq { text-align: left; padding-top: 1.5rem; }
+.kennedy-faq__item { border-bottom: 1px solid var(--book-line); }
+.kennedy-faq__trigger { gap: 1rem; padding: 1.5rem .25rem; font: 800 1rem/1.5 var(--font-body); color: var(--color-charcoal); text-decoration: none; }
+.kennedy-faq__trigger:hover { color: var(--color-flame-dark); text-decoration: none; }
+.kennedy-faq__trigger > span:nth-child(2) { flex: 1; }
+.kennedy-faq__trigger > svg { color: var(--color-flame); width: 1.25rem; height: 1.25rem; }
+.kennedy-faq__number { color: var(--color-flame-dark); font-size: .75rem; flex: none; }
+.kennedy-faq__answer { padding: 0 2.5rem 1.5rem; font: 600 .9rem/1.75 var(--font-body); }
+@media (max-width: 1023px) { .guest-stories__grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem; } .guest-story__body { min-height: 15rem; } .guest-story blockquote { min-height: 6.5rem; } .kennedy-faq { gap: 2rem; } }
+@media (max-width: 639px) { .guest-stories { padding: 3.5rem 1.25rem; } .community-heading h2 { font-size: 2.25rem; } .guest-stories__grid { grid-template-columns: minmax(0,1fr); gap: 1.5rem; max-width: 24rem; margin: 2rem auto 0; } .guest-story__portrait { height: 11rem; } .guest-story__portrait > span { inset-inline: 2rem; } .guest-story__portrait img { height: 12.5rem; } .guest-story__body { min-height: 0; } .guest-story blockquote { min-height: 0; } .kennedy-faq { grid-template-columns: minmax(0,1fr); padding: 1rem 1.25rem 4rem; gap: 1.5rem; } .kennedy-faq__trigger { min-height: 4.5rem; } }
+@media (prefers-reduced-motion: reduce) { .kennedy-community [data-state] { animation: none; transition: none; } }
+
 /* Dedicated storefront book — tactile charcoal binding, cream paper, flame controls. */
 :root {
   --book-line: color-mix(in oklch, var(--color-charcoal) 18%, transparent);
