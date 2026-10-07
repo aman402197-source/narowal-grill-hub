@@ -4028,7 +4028,7 @@ img { image-rendering: auto; }
 
 /* Makisu-style paper fold rig */
 .fold-rig { position: absolute; inset: 0; z-index: 20; perspective: 1200px; pointer-events: none; transition: opacity .3s; }
-.guest-card.ready > .fold-rig { opacity: 0; }
+.scroll-fold.ready > .fold-rig { opacity: 0; }
 .fold-rig .node { position: relative; display: block; transform-origin: 50% 0; transform-style: preserve-3d; }
 .fold-rig .item { position: relative; transform-style: preserve-3d; }
 .fold-rig .inner { position: relative; overflow: hidden; backface-visibility: hidden; }
@@ -4076,6 +4076,13 @@ img { image-rendering: auto; }
 .kennedy-faq { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; max-width: 1160px; margin: auto; padding: 2rem 2rem 6rem; align-items: start; }
 .community-heading--faq { text-align: left; padding-top: 1.5rem; }
 .kennedy-faq__item { border-bottom: 1px solid var(--book-line); }
+.faq-fold { position: relative; overflow: visible; }
+.faq-fold.fold-enabled:not(.ready) > :not(.fold-rig) { visibility: hidden; }
+.faq-fold.ready > :not(.fold-rig) { animation: guest-card-fade .35s ease both; }
+.faq-fold .fold-rig .clone { display: block; }
+.faq-fold .fold-rig .back { background: var(--color-cream); box-shadow: none; }
+.faq-fold .fold-rig .first .inner, .faq-fold .fold-rig .first .face,
+.faq-fold .fold-rig .last .inner, .faq-fold .fold-rig .last .face { border-radius: 0; }
 .kennedy-faq__trigger { gap: 1rem; padding: 1.5rem .25rem; font: 800 1rem/1.5 var(--font-body); color: var(--color-charcoal); text-decoration: none; }
 .kennedy-faq__trigger:hover { color: var(--color-flame-dark); text-decoration: none; }
 .kennedy-faq__trigger > span:nth-child(2) { flex: 1; }
@@ -4084,7 +4091,7 @@ img { image-rendering: auto; }
 .kennedy-faq__answer { padding: 0 2.5rem 1.5rem; font: 600 .9rem/1.75 var(--font-body); }
 @media (max-width: 1023px) { .guest-stories { margin-inline: 1rem; padding-inline: 2rem; } .kennedy-faq { gap: 2rem; } }
 @media (max-width: 639px) { .guest-stories { padding: 3.5rem 1.25rem 4.5rem; border-radius: 28px; margin-inline: .75rem; } .avatar { --size: 180px; } .card-body { padding: 12px 16px 18px; } .kennedy-faq { grid-template-columns: minmax(0,1fr); padding: 1rem 1.25rem 4rem; gap: 1.5rem; } .kennedy-faq__trigger { min-height: 4.5rem; } }
-@media (prefers-reduced-motion: reduce) { .kennedy-community [data-state] { animation: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .kennedy-community [data-state], .scroll-fold.ready > :not(.fold-rig) { animation: none; transition: none; } }
 
 /* Dedicated storefront book — tactile charcoal binding, cream paper, flame controls. */
 :root {
