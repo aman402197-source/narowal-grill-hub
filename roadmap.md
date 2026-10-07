@@ -1,5 +1,5 @@
 # Menu reference update
-- [ ] Remove the uploaded truck's green screen, animate it towing the existing offer tape, and verify continuous offers and reduced-motion behavior.
+- [x] Remove the uploaded truck's green screen and animate it towing the existing offer tape; transparent truck loads, offers continue scrolling, phone has no overflow, reduced-motion offers remain visible, no page errors, and build OK.
 - [x] Apply testimonial-style staged unfolding to FAQs, hide the empty cart dock, and retain only the hero menu-book entry; browser verified fold rigs, all five revealed rows, working answers, one working book button, no empty cart icon, and no page errors. Build OK.
 - [x] Add reference-inspired raised-character sample guest stories and smooth mobile/desktop FAQs; all portraits load, questions expand, and phone layout has no horizontal overflow or page errors.
 - [x] Convert the ten local menu food images to high-quality WebP, reducing them from 13.68 MB to 1.09 MB while preserving transparency.
