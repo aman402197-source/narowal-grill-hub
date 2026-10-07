@@ -4005,16 +4005,9 @@ img { image-rendering: auto; }
 .community-heading h2 em { color: var(--color-flame); font-style: normal; }
 .community-heading p { margin-top: 1rem; font-size: .95rem; }
 .guest-stories__sample { display: inline-block; margin-top: .75rem; color: var(--color-charcoal); opacity: .65; font-size: .75rem; }
-/* ===== Liquid-glass fold testimonials (Kennedy cream, matching slice section) ===== */
-.guest-stories { position: relative; max-width: 1280px; margin: 0 auto 4rem; padding: 5rem 2.5rem 6rem; border-radius: 40px; overflow: hidden;
-  background:
-    radial-gradient(
-      120% 90% at 50% 0%,
-      oklch(from var(--color-cream) calc(l + 0.03) c h) 0%,
-      var(--color-cream) 55%,
-      var(--color-cream-deep) 100%
-    );
-  color: var(--color-charcoal); box-shadow: var(--shadow-card); }
+/* ===== Liquid-glass fold testimonials (transparent glass, no section backdrop) ===== */
+.guest-stories { position: relative; max-width: 1280px; margin: 0 auto 4rem; padding: 5rem 2.5rem 6rem;
+  color: var(--color-charcoal); }
 .guest-stories__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem 1.5rem; margin-top: 3rem; perspective: 1200px; }
 
 /* Liquid glass layers */
