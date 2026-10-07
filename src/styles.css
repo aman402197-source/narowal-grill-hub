@@ -3996,7 +3996,7 @@ html:not(.fonts-ready) .opening-pct { opacity: 0; }
 img { image-rendering: auto; }
 
 /* Raised guest portraits and cream-paper stories, scoped to the storefront. */
-.kennedy-community { --guest-sage: oklch(0.75 0.08 145); --guest-rose: oklch(0.8 0.08 20); --guest-sky: oklch(0.78 0.07 235); background: var(--color-cream); color: var(--color-charcoal); font-family: var(--font-body); }
+.kennedy-community { background: var(--color-cream); color: var(--color-charcoal); font-family: var(--font-body); }
 .guest-stories { max-width: 1280px; margin: auto; padding: 5rem 2rem 6rem; }
 .community-heading { text-align: center; }
 .community-eyebrow { display: inline-flex; align-items: center; gap: .5rem; color: var(--color-flame-dark); font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
@@ -4005,22 +4005,77 @@ img { image-rendering: auto; }
 .community-heading h2 em { color: var(--color-flame); font-style: normal; }
 .community-heading p { margin-top: 1rem; font-size: .95rem; }
 .guest-stories__sample { display: inline-block; margin-top: .75rem; color: var(--color-charcoal); opacity: .65; font-size: .75rem; }
-.guest-stories__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1.4rem; margin-top: 3rem; }
-.guest-story { min-width: 0; position: relative; padding-top: 1.25rem; }
-.guest-story__portrait { position: relative; height: 10.5rem; width: 100%; isolation: isolate; }
-.guest-story__portrait > span { position: absolute; inset: 3.1rem 1.25rem 0; background: var(--guest-sage); border-radius: 8px; transform: rotate(-5deg); }
-.guest-story--2 .guest-story__portrait > span { background: var(--guest-sky); transform: rotate(4deg); }
-.guest-story--3 .guest-story__portrait > span { background: var(--color-gold); }
-.guest-story--4 .guest-story__portrait > span { background: var(--guest-rose); transform: rotate(4deg); }
-.guest-story__portrait img { position: relative; display: block; width: 100%; height: 12rem; object-fit: contain; object-position: center bottom; bottom: 1.5rem; }
-.guest-story__body { position: relative; min-height: 17.5rem; background: var(--color-cream-deep); border: 1px solid var(--book-line); border-radius: 8px; padding: 1.5rem; box-shadow: var(--shadow-card); }
-.guest-story__quote { position: absolute; right: 1.2rem; top: 1.2rem; width: 1.5rem; height: 1.5rem; color: var(--color-flame); opacity: .2; }
-.guest-story__stars { display: flex; gap: .2rem; color: var(--color-flame-dark); }
-.guest-story__stars svg { width: .9rem; height: .9rem; fill: currentColor; }
-.guest-story blockquote { font-size: .95rem; line-height: 1.65; margin-top: 1.1rem; min-height: 8.7rem; }
-.guest-story__person { border-top: 1px solid var(--book-line); padding-top: .85rem; margin-top: .85rem; }
-.guest-story__person h3 { font: 800 1rem var(--font-display); }
-.guest-story__person span { display: block; margin-top: .2rem; font-size: .75rem; color: var(--color-flame-dark); }
+/* ===== Liquid-glass fold testimonials (Kennedy red/cream) ===== */
+.guest-stories { position: relative; max-width: 1280px; margin: 0 auto 4rem; padding: 5rem 2.5rem 6rem; border-radius: 40px; overflow: hidden;
+  background:
+    radial-gradient(rgba(255,240,200,.16) 1.5px, transparent 1.6px) 0 0/26px 26px,
+    linear-gradient(165deg, var(--color-flame) 0%, var(--color-flame-dark) 82%);
+  color: var(--color-cream); box-shadow: var(--shadow-card); }
+.guest-stories__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem 1.5rem; margin-top: 3rem; perspective: 1200px; }
+
+/* Liquid glass layers */
+.liquidGlass-wrapper { --lg-tint: rgba(255,248,235,.18); --lg-shine: inset 2px 2px 1px 0 rgba(255,255,255,.5), inset -1px -1px 1px 1px rgba(255,255,255,.5);
+  position: relative; display: flex; overflow: hidden; color: var(--color-cream); border-radius: 28px;
+  box-shadow: 0 6px 6px rgba(46,10,4,.28), 0 0 20px rgba(46,10,4,.14);
+  transition: box-shadow .4s cubic-bezier(.175,.885,.32,2.2); }
+.liquidGlass-effect { position: absolute; z-index: 0; inset: 0; backdrop-filter: blur(3px); filter: url(#kennedy-glass-distortion); overflow: hidden; isolation: isolate; }
+.liquidGlass-tint { position: absolute; z-index: 1; inset: 0; background: var(--lg-tint); }
+.liquidGlass-shine { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; box-shadow: var(--lg-shine); }
+.liquidGlass-text { position: relative; z-index: 3; flex: 1; min-width: 0; }
+
+.guest-card { border-radius: 28px; overflow: visible; }
+.guest-card:not(.ready) { box-shadow: none; }
+.guest-card:not(.ready) > :not(.fold-rig) { visibility: hidden; }
+.guest-card.ready > :not(.fold-rig) { animation: guest-card-fade .35s ease both; }
+@keyframes guest-card-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Makisu-style paper fold rig */
+.fold-rig { position: absolute; inset: 0; z-index: 20; perspective: 1200px; pointer-events: none; transition: opacity .3s; }
+.guest-card.ready > .fold-rig { opacity: 0; }
+.fold-rig .node { position: relative; display: block; transform-origin: 50% 0; transform-style: preserve-3d; }
+.fold-rig .item { position: relative; transform-style: preserve-3d; }
+.fold-rig .inner { position: relative; overflow: hidden; backface-visibility: hidden; }
+.fold-rig .clone { position: absolute; left: 0; display: flex; color: var(--color-cream); }
+.fold-rig .clone > .liquidGlass-tint, .fold-rig .clone > .liquidGlass-shine { border-radius: 28px; }
+.fold-rig .face { position: absolute; inset: 0; pointer-events: none; }
+.fold-rig .back { background: rgba(255,250,240,.38); box-shadow: var(--lg-shine); transform: rotateX(180deg) translateZ(.1px); backface-visibility: hidden; }
+.fold-rig .over { background: rgba(0,0,0,.14); opacity: 0; transform: translateZ(.1px); }
+.fold-rig .first .inner, .fold-rig .first .face { border-radius: 28px 28px 0 0; }
+.fold-rig .last .inner, .fold-rig .last .face { border-radius: 0 0 28px 28px; }
+.guest-card > .liquidGlass-effect, .guest-card > .liquidGlass-tint, .guest-card > .liquidGlass-shine { border-radius: 28px; }
+.guest-card:hover { box-shadow: 0 14px 24px rgba(46,10,4,.32), 0 0 28px rgba(46,10,4,.16); }
+
+.card-body { padding: 14px 20px 22px; text-shadow: 0 1px 2px rgba(0,0,0,.3); }
+
+/* Avatar with raised panel and hover name reveal */
+.avatar { --size: 210px; position: relative; width: var(--size); height: var(--size); margin: 0 auto 14px;
+  --img-scale: .93; --img-shadow: drop-shadow(4px 6px 3px rgba(40,8,2,.35)); --name-y: -38px; --name-opacity: 0; --bg-blur: 0px; }
+.avatar-img { width: 100%; height: 100%; clip-path: path("M 0 -45 L 210 -45 L 210 155 C 105 155 0 245 0 155 Z"); position: relative; }
+.avatar-img::before { content: ''; position: absolute; inset: 48% 0 0 0; z-index: -1; border-radius: 16px;
+  background-color: var(--panel); box-shadow: inset 0 2px 6px rgba(255,255,255,.35), 0 6px 14px rgba(0,0,0,.18);
+  filter: blur(var(--bg-blur)); transition: filter .32s ease; }
+.avatar-img img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform-origin: bottom center;
+  scale: var(--img-scale); filter: var(--img-shadow); transition: scale .32s cubic-bezier(.22,1,.36,1), filter .32s ease; }
+.avatar p { font: 600 1.35rem var(--font-display); color: var(--name-c); position: absolute; bottom: -6px; right: 6px;
+  translate: 0 var(--name-y); opacity: var(--name-opacity); z-index: 2;
+  transition: translate .32s cubic-bezier(.34,1.56,.64,1), opacity .28s ease; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.avatar:hover { --img-scale: 1.13; --img-shadow: drop-shadow(7px 12px 5px rgba(40,8,2,.4)); --name-y: 0; --name-opacity: 1; --bg-blur: 12px; }
+
+.qmark { font-family: Georgia, 'Times New Roman', serif; font-size: 3.4rem; line-height: 1; height: 30px; text-align: center; color: var(--color-gold); margin-bottom: 6px; }
+.quote { font-size: .95rem; line-height: 1.6; text-align: center; margin-bottom: 5px; color: var(--color-cream); }
+.role { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-align: center; opacity: .85; color: var(--color-cream); }
+
+.guest-stories .community-heading { color: var(--color-cream); text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.guest-stories .community-eyebrow { color: var(--color-gold); }
+.guest-stories .community-heading h2 { color: var(--color-cream); }
+.guest-stories .community-heading h2 em { color: var(--color-gold); position: relative; }
+.guest-stories .community-heading h2 em::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 4px; background: var(--color-gold); border-radius: 3px;
+  transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.guest-stories .community-heading.visible h2 em::after { transform: scaleX(1); }
+.guest-stories .community-heading p { color: var(--color-cream); opacity: .9; }
+.guest-stories .guest-stories__sample { color: var(--color-cream); }
+.guest-stories .guest-stories__sample { display: inline-block; margin-top: .75rem; opacity: .7; font-size: .75rem; }
+.guest-glass-filter { position: absolute; width: 0; height: 0; overflow: hidden; }
 .kennedy-faq { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; max-width: 1160px; margin: auto; padding: 2rem 2rem 6rem; align-items: start; }
 .community-heading--faq { text-align: left; padding-top: 1.5rem; }
 .kennedy-faq__item { border-bottom: 1px solid var(--book-line); }
@@ -4030,8 +4085,8 @@ img { image-rendering: auto; }
 .kennedy-faq__trigger > svg { color: var(--color-flame); width: 1.25rem; height: 1.25rem; }
 .kennedy-faq__number { color: var(--color-flame-dark); font-size: .75rem; flex: none; }
 .kennedy-faq__answer { padding: 0 2.5rem 1.5rem; font: 600 .9rem/1.75 var(--font-body); }
-@media (max-width: 1023px) { .guest-stories__grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem; } .guest-story__body { min-height: 15rem; } .guest-story blockquote { min-height: 6.5rem; } .kennedy-faq { gap: 2rem; } }
-@media (max-width: 639px) { .guest-stories { padding: 3.5rem 1.25rem; } .community-heading h2 { font-size: 2.25rem; } .guest-stories__grid { grid-template-columns: minmax(0,1fr); gap: 1.5rem; max-width: 24rem; margin: 2rem auto 0; } .guest-story__portrait { height: 11rem; } .guest-story__portrait > span { inset-inline: 2rem; } .guest-story__portrait img { height: 12.5rem; } .guest-story__body { min-height: 0; } .guest-story blockquote { min-height: 0; } .kennedy-faq { grid-template-columns: minmax(0,1fr); padding: 1rem 1.25rem 4rem; gap: 1.5rem; } .kennedy-faq__trigger { min-height: 4.5rem; } }
+@media (max-width: 1023px) { .guest-stories { margin-inline: 1rem; padding-inline: 2rem; } .kennedy-faq { gap: 2rem; } }
+@media (max-width: 639px) { .guest-stories { padding: 3.5rem 1.25rem 4.5rem; border-radius: 28px; margin-inline: .75rem; } .avatar { --size: 180px; } .card-body { padding: 12px 16px 18px; } .kennedy-faq { grid-template-columns: minmax(0,1fr); padding: 1rem 1.25rem 4rem; gap: 1.5rem; } .kennedy-faq__trigger { min-height: 4.5rem; } }
 @media (prefers-reduced-motion: reduce) { .kennedy-community [data-state] { animation: none; transition: none; } }
 
 /* Dedicated storefront book — tactile charcoal binding, cream paper, flame controls. */
