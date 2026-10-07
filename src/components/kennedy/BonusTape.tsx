@@ -1,4 +1,6 @@
 import { Flame, Gift, Pizza, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import truck from "@/assets/kennedy-truck.webp.asset.json";
 
 type Item = { label: string; Icon: typeof Flame };
 
@@ -31,11 +33,33 @@ function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
 }
 
 export function BonusTape() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
-      className="tape-section"
+      ref={sectionRef}
+      className="tape-section truck-tape-section"
+      data-started={started ? "true" : undefined}
       aria-label="Today's deals and bonus offers"
     >
+      {started && <div className="offer-truck" aria-hidden="true">
+        <span className="offer-truck-hitch" />
+        <img src={truck.url} alt="" width={328} height={240} decoding="async" />
+      </div>}
       <div className="ticket ticket--gold">
         <span className="ticket-badge">
           <Pizza aria-hidden="true" />
