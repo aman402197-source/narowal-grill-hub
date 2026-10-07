@@ -299,7 +299,12 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding-top: 4.5rem;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    min-height: 160px;
+    align-content: end;
+    gap: 0;
     --offer-truck-width: 220px;
   }
   .truck-tape-section .ticket {
@@ -316,23 +321,30 @@
     animation-delay: 6.5s;
     animation-play-state: running;
   }
+  .truck-tape-section[data-visible="true"] .offer-truck {
+    animation-play-state: running;
+  }
+  .truck-tape-section:not([data-visible="true"]) .tape-row {
+    animation-play-state: paused;
+  }
   .truck-tape-section .ticket-badge,
   .truck-tape-section .tape-item { letter-spacing: 0; }
   .offer-truck {
     position: absolute;
     z-index: 5;
     width: var(--offer-truck-width);
-    bottom: 1.8rem;
+    bottom: 0;
     left: calc(-1 * var(--offer-truck-width));
     pointer-events: none;
-    animation: offer-truck-drive 6.5s linear both;
+    animation: offer-truck-drive 6.5s linear infinite;
+    animation-play-state: paused;
   }
   .offer-truck img { display: block; width: 100%; height: auto; }
   .offer-truck-hitch {
     position: absolute;
-    left: -12px;
+    left: -4px;
     bottom: 22%;
-    width: 28px;
+    width: 20px;
     height: 3px;
     background: var(--color-charcoal);
     transform: rotate(-12deg);
@@ -346,8 +358,7 @@
     to { clip-path: inset(0 0 0 0); }
   }
   @media (max-width: 639px) {
-    .truck-tape-section { --offer-truck-width: 166px; padding-top: 3.5rem; }
-    .offer-truck { bottom: 1.25rem; }
+    .tape-section.truck-tape-section { --offer-truck-width: 166px; padding: 0; margin: 0; gap: 0; min-height: 122px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .truck-tape-section .ticket,
