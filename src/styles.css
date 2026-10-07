@@ -3996,7 +3996,7 @@ html:not(.fonts-ready) .opening-pct { opacity: 0; }
 img { image-rendering: auto; }
 
 /* Raised guest portraits and cream-paper stories, scoped to the storefront. */
-.kennedy-community { --guest-sage: oklch(0.75 0.08 145); --guest-rose: oklch(0.8 0.08 20); --guest-sky: oklch(0.78 0.07 235); background: var(--color-cream); color: var(--color-charcoal); font-family: var(--font-body); }
+.kennedy-community { background: var(--color-cream); color: var(--color-charcoal); font-family: var(--font-body); }
 .guest-stories { max-width: 1280px; margin: auto; padding: 5rem 2rem 6rem; }
 .community-heading { text-align: center; }
 .community-eyebrow { display: inline-flex; align-items: center; gap: .5rem; color: var(--color-flame-dark); font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
