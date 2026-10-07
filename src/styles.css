@@ -350,8 +350,10 @@
     .offer-truck { bottom: 1.25rem; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .truck-tape-section .ticket { clip-path: none; animation: none; }
-    .truck-tape-section .tape-row { animation: none; }
+    .truck-tape-section .ticket,
+    .truck-tape-section[data-started="true"] .ticket { clip-path: none; animation: none; }
+    .truck-tape-section .tape-row,
+    .truck-tape-section[data-started="true"] .tape-row { animation: none; }
     .offer-truck { display: none; }
   }
 
