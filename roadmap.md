@@ -1,4 +1,5 @@
 # Menu reference update
+- [ ] Loop the truck, remove surrounding offer spacing, and start only after scrolling; verify the scroll gate and repeated motion.
 - [x] Remove the uploaded truck's green screen and animate it towing the existing offer tape; transparent truck loads, offers continue scrolling, phone has no overflow, reduced-motion offers remain visible, no page errors, and build OK.
 - [x] Apply testimonial-style staged unfolding to FAQs, hide the empty cart dock, and retain only the hero menu-book entry; browser verified fold rigs, all five revealed rows, working answers, one working book button, no empty cart icon, and no page errors. Build OK.
 - [x] Add reference-inspired raised-character sample guest stories and smooth mobile/desktop FAQs; all portraits load, questions expand, and phone layout has no horizontal overflow or page errors.

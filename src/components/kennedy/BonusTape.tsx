@@ -35,18 +35,29 @@ function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
 export function BonusTape() {
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting) {
+    let hasScrolled = false;
+    const onScroll = () => {
+      hasScrolled = true;
+      const bounds = section.getBoundingClientRect();
+      if (bounds.top < window.innerHeight * 0.9 && bounds.bottom > 0) {
         setStarted(true);
-        observer.disconnect();
       }
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(Boolean(entry?.isIntersecting));
+      if (entry?.isIntersecting && hasScrolled) setStarted(true);
     }, { threshold: 0.25 });
     observer.observe(section);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -54,6 +65,7 @@ export function BonusTape() {
       ref={sectionRef}
       className="tape-section truck-tape-section"
       data-started={started ? "true" : undefined}
+      data-visible={visible ? "true" : undefined}
       aria-label="Today's deals and bonus offers"
     >
       {started && <div className="offer-truck" aria-hidden="true">
