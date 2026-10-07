@@ -1,4 +1,5 @@
 # Menu reference update
+- [x] Slow the truck and synchronize each loop with tape reveal, disappearance, and replay; browser checked 12-second timing, hidden tape between passes, matching first/second unfolds, scroll-only start, no page errors, and build OK.
 - [x] Loop the truck, remove surrounding offer spacing, and start only after scrolling; browser confirmed no initial start, scroll-triggered infinite movement, zero section margin/padding/gap, no page errors, and build OK.
 - [x] Remove the uploaded truck's green screen and animate it towing the existing offer tape; transparent truck loads, offers continue scrolling, phone has no overflow, reduced-motion offers remain visible, no page errors, and build OK.
 - [x] Apply testimonial-style staged unfolding to FAQs, hide the empty cart dock, and retain only the hero menu-book entry; browser verified fold rigs, all five revealed rows, working answers, one working book button, no empty cart icon, and no page errors. Build OK.

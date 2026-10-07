@@ -21,4 +21,4 @@ Active customer orders surface through one shared edge-mounted tracking tab outs
 The hero menu-book entry opens the controlled accessible storefront dialog without a floating duplicate; book presentation stays scoped so chat and live menu contracts are unchanged.
 Homepage guest stories and FAQs use a scoped presentation module and the shared accessible accordion; illustrative sample stories must not be represented as verified customer reviews.
 Guest stories and FAQ rows share the staged scroll-fold presentation; animation copies are inert and hidden from assistive technology to preserve accordion accessibility.
-Offer tape uses the uploaded transparent truck with scroll-gated looping motion, paused offscreen, and a single CSS tape reveal; scoped spacing keeps truck and tape together, while reduced motion keeps offers static and visible.
+Offer tape and uploaded transparent truck share one CSS cycle duration for synchronized scroll-gated loops: reveal while towing, hide after departure, then repeat; both pause offscreen and reduced motion keeps offers static and visible.
