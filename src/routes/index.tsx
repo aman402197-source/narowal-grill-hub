@@ -14,6 +14,7 @@ import { PizzaMascot } from "@/components/kennedy/PizzaMascot";
 import { BonusTape } from "@/components/kennedy/BonusTape";
 import { MenuShowcase } from "@/components/kennedy/MenuShowcase";
 import { MenuBookLauncher } from "@/components/kennedy/MenuBookLauncher";
+import { GuestStories } from "@/components/kennedy/GuestStories";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 import { SliceGallery } from "@/components/kennedy/SliceGallery";
@@ -356,6 +357,8 @@ function Index() {
         <Reveal from="up" amount={0.15}>
           <SliceGallery />
         </Reveal>
+
+        <GuestStories />
 
       </div>
 
