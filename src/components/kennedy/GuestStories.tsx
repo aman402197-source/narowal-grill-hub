@@ -39,7 +39,8 @@ export function GuestStories() {
     const grid = gridRef.current;
     const title = titleRef.current;
     if (!grid || !title) return;
-    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".guest-card"));
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".scroll-fold"));
+    cards.forEach((card) => card.classList.add("fold-enabled"));
 
     if (reduced) {
       cards.forEach((c) => c.classList.add("ready"));
@@ -61,6 +62,8 @@ export function GuestStories() {
       c._open = true;
       const H = card.offsetHeight, sh = Math.ceil(H / N), time = SPEED * (1 - OVERLAP);
       const rig = mk("fold-rig");
+      rig.setAttribute("aria-hidden", "true");
+      rig.inert = true;
       card.appendChild(rig);
       c._rig = rig;
       const src = Array.from(card.children).filter(
@@ -155,13 +158,14 @@ export function GuestStories() {
         c._rig?.remove();
         c._rig = null;
         card.classList.remove("ready");
+        card.classList.remove("fold-enabled");
       });
       title.classList.remove("visible");
     };
   }, [reduced]);
 
   return (
-    <div>
+    <div ref={gridRef}>
       <section className="guest-stories" aria-labelledby="guest-stories-title">
         <div className="community-heading" ref={titleRef}>
           <span className="community-eyebrow">Around the Kennedy table</span>
@@ -174,9 +178,9 @@ export function GuestStories() {
           <span className="guest-stories__sample">Sample guest stories</span>
         </div>
 
-        <div className="guest-stories__grid" ref={gridRef}>
+        <div className="guest-stories__grid">
           {STORIES.map((story) => (
-            <div key={story.name} className="liquidGlass-wrapper guest-card">
+            <div key={story.name} className="liquidGlass-wrapper guest-card scroll-fold">
               <div className="liquidGlass-effect" />
               <div className="liquidGlass-tint" />
               <div className="liquidGlass-shine" />
@@ -225,7 +229,7 @@ export function GuestStories() {
         </div>
         <Accordion type="single" collapsible className="kennedy-faq__list">
           {FAQS.map((faq, index) => (
-            <AccordionItem key={faq.question} value={`faq-${index}`} className="kennedy-faq__item">
+            <AccordionItem key={faq.question} value={`faq-${index}`} className="kennedy-faq__item scroll-fold faq-fold">
               <AccordionTrigger className="kennedy-faq__trigger"><span className="kennedy-faq__number">0{index + 1}</span><span>{faq.question}</span></AccordionTrigger>
               <AccordionContent className="kennedy-faq__answer">{faq.answer}</AccordionContent>
             </AccordionItem>

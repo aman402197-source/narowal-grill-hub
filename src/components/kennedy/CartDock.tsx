@@ -46,7 +46,7 @@ export function CartDock() {
     return () => el.style.setProperty("--kmg-cart-bar", "0px");
   }, [count, hidden]);
 
-  if (hidden) return null;
+  if (hidden || count === 0) return null;
 
   return (
     <>
